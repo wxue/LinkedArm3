@@ -3,8 +3,8 @@
 
 import math
 import numpy as np
-import scipy.optimize
 import itertools
+import scipy.optimize
 
 class LinkedArm3:
 
@@ -52,8 +52,7 @@ class LinkedArm3:
 
         def distance_to_default(joint_angle, *args):
             """
-            Calculates the Euclidean distance through joint space to the
-            default arm configuration. 
+            Distance through joint space to the default arm configuration. 
 
             Input: joint angles -- [Theta1, Theta2, Theta3]
             Output : euclidean distance to the default arm position
@@ -63,4 +62,44 @@ class LinkedArm3:
             return np.sqrt(np.sum([(ith_joint_angle - ith_joint_angle_default)**2 * ith_weight
                 for ith_joint_angle, ith_joint_angle_default, ith_weight in itertools.zip_longest(joint_angle, self.joint_angle_default, weight)]))
 
-        
+        def x_constraint(joint_angle, xy):
+            """
+            Input: [Theta1, Theta2, Theta3]
+            Output: difference between current and target endopint position -- x
+            """
+            x = (self.arm_length[0]*np.cos(joint_angle[0]) + self.arm_length[1]*np.cos(joint_angle[0]+joint_angle[1]) +
+                 self.arm_length[2]*np.cos(np.sum(joint_angle))) - xy[0]
+            return x
+
+        def y_constraint(joint_angle, xy):
+            """
+            Input: [Theta1, Theta2, Theta3]
+            Output: difference between current and target endopint position -- y
+            """
+            y = (self.arm_length[0]*np.sin(joint_angle[0]) + self.arm_length[1]*np.sin(joint_angle[0]+joint_angle[1]) +
+                 self.arm_length[2]*np.sin(np.sum(joint_angle))) - xy[1]
+            return y
+
+        def raise_constraint(joint_angle, xy):
+            """
+            Used in the function minimization such that the output from
+            this function must be greater than 0 to be successfully passed.
+            """
+            return self.max_angles - joint_angle
+
+        def fall_constraint(joint_angle, xy):
+            """
+            Used in the function minimization such that the output from
+            this function must be greater than 0 to be successfully passed.
+            """
+            return joint_angle - self.min_angles
+
+        return scipy.optimize.fmin_slsqp(
+            func=distance_to_default,
+            x0=self.joint_angle,    # Initial guess for the independent variable(s).
+            eqcons=[x_constraint,   # A list of functions of length n such that eqcons[j](x,*args) == 0.0 in a successfully optimized problem.
+                    y_constraint],
+            ieqcons=[raise_constraint,  # A list of functions of length n such that ieqcons[j](x,*args) >= 0.0 in a successfully optimized problem.
+                     fall_constraint],
+            args=(xy,),
+            iprint=0)   # iprint <= 0 : Silent operation; iprint == 1 : Print summary upon completion (default); iprint >= 2 : Print status of each iterate and summary
