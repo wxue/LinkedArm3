@@ -40,7 +40,7 @@ def visualize():
         for i in range(3): 
             pyglet.graphics.draw(2, pyglet.gl.GL_LINES, ('v2i', 
                 (window.jps[0][i], window.jps[1][i], 
-                 window.jps[0][i+1], window.jps[1][i+1])))
+                 window.jps[0][i+1], window.jps[1][i+1])), ('c3B', (0, 0, 255, 0, 255, 0)))
 
     @window.event
     def on_mouse_motion(x, y, dx, dy):
