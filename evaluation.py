@@ -20,20 +20,20 @@ def evaluate(range_of_x, range_of_y, error_threshold):
             x_y = [range_of_x[ith_x], range_of_y[ith_y]]
             # [x,y] -> angle
             angle = arm.inverse_kinematics(xy=x_y)
-            # get actual endpoint postion
+            # get Predicted endpoint postion
             actual_xy = arm.get_endpoint(angle)
             # calculate root squared error
             error = np.sqrt((np.array(x_y) - np.array(actual_xy))**2)
 
             # print errors that exceed the threshold
             if np.sum(error) > error_threshold:
-                print('********* Trail #{0:d} *********'.format(trail_counter))
+                print('********* Trail #{0:d} *********'.format(trail_counter+1))
                 print('Task: ')
                 print('  Initial joint angles', arm.joint_angle)
                 print('  Reached joint angles: ', angle)
                 print('Result: ')
-                print('  Correct endpoint position: ', x_y)
-                print('  Actual endpoint position: ', actual_xy)
+                print('  Target endpoint position: ', x_y)
+                print('  Predicted endpoint position: ', actual_xy)
                 print('Summary: ')
                 print('  Error: ', error)
                 print('Running time: ', (time.time() - start_time)*1000, "ms")
