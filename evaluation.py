@@ -30,10 +30,11 @@ def evaluate(range_of_x, range_of_y, error_threshold):
                 print('********* Trail #{0:d} *********'.format(trail_counter+1))
                 print('Task: ')
                 print('  Initial joint angles', arm.joint_angle)
-                print('  Reached joint angles: ', angle)
                 print('Result: ')
+                print('  Reached joint angles: ', angle)
+                print('Cost: ')
                 print('  Target endpoint position: ', x_y)
-                print('  Predicted endpoint position: ', actual_xy)
+                print('  Actual endpoint position: ', actual_xy)
                 print('Summary: ')
                 print('  Error: ', error)
                 print('Running time: ', (time.time() - start_time)*1000, "ms")
@@ -43,8 +44,8 @@ def evaluate(range_of_x, range_of_y, error_threshold):
 # 
 # Main: Testing
 # 
-x = np.arange(0, 5, 0.5)
-y = np.arange(0, 5, 0.5)
-threshold = 0.8
+x = np.arange(340, 360, 5)
+y = np.arange(150, 170, 5)
+threshold = 0.0
 
 evaluate(x, y, threshold)

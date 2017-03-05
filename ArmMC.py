@@ -18,7 +18,8 @@ class LinkedArm3:
         # set default joint angles: Theta1-shoulder, Theta2-elbow, Theta3-wrist
         self.joint_angle_default = np.array([math.pi/6, math.pi/6, math.pi/6]) if joint_angle_default is None else joint_angle_default
         # set angles rotation range
-        self.max_angles = [math.pi*2, math.pi*2, math.pi*2]
+        # self.max_angles = [math.pi*2, math.pi*2, math.pi*2]
+        self.max_angles = [math.pi, math.pi/2, math.pi/2]
         self.min_angles = [0, 0, 0]
         
         # initialize joint angles: Theta1, Theta2, Theta3
@@ -58,7 +59,8 @@ class LinkedArm3:
             Output : euclidean distance to the default arm position
             """
             # Weight: each joint moving priority
-            weight = [1, 1, 1]
+            weight = [1, 1.5, 2]
+            # weight = [1, 1, 1]
             return np.sqrt(np.sum([(ith_joint_angle - ith_joint_angle_default)**2 * ith_weight
                 for ith_joint_angle, ith_joint_angle_default, ith_weight in itertools.zip_longest(joint_angle, self.joint_angle_default, weight)]))
 

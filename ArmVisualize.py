@@ -49,12 +49,10 @@ def visualize():
         arm.joint_angle = angle
         # get actual endpoint postion
         actual_xy = arm.get_endpoint(angle)
-        actual_x = actual_xy[0]
-        actual_y = actual_xy[1]
         # calculate root squared error
         error = np.sqrt((np.array(x_y) - np.array(actual_xy))**2)
 
-        label.text = 'Target Point: (%.3f, %.3f) vs Predicted Point: (%.3f, %.3f)'%(x,y,actual_x,actual_y)
+        label.text = 'Target Point: (%.3f, %.3f) Angels: (%.3f, %.3f, %.3f)'%(x,y,angle[0],angle[1],angle[2])
         window.jps = get_jointpoints()
 
     pyglet.app.run()
