@@ -81,17 +81,17 @@ So our cost function a calculation of the difference/distance between the defaul
 Initially the weight of each joint moving priority is set equally, and the result is:
 
 ```
-********* Trail #16 *********
+********* Trail #24 *********
 Task:
-  Initial joint angles [0.5235987755982988, 0.5235987755982988, 0.5235987755982988]
+  Initial joint angles [0, 0, 0]
 Result:
-  Reached joint angles:  [-4.74040754  4.97027623  4.96426483]
+  Reached joint angles:  [ 1.26111729 -0.50670037 -1.66082699]
 Cost:
-  Target endpoint position:  [355, 165]
-  Actual endpoint position:  [146.50370836787476, 34.126919013818878]
+  Target endpoint position:  [165, 85]
+  Predicted endpoint position:  [164.99999999770193, 85.000000000189559]
 Summary:
-  Error:  [ 208.49629163  130.87308099]
-Running time:  693.4010982513428 ms
+  Error:  [  2.29806574e-09   1.89558591e-10]
+Running time:  305.3700923919678 ms
 ------------------------------
 ```
 
@@ -100,25 +100,24 @@ After tried different settings, I found out with a lager weight set on wrist and
 Which means a closer angel state the wrist and elbow stay a better result we will get, relatively. A sample evaluation of set weight to [1, 1.5, 2] is shown below:
 
 ```
-********* Trail #16 *********
+********* Trail #24 *********
 Task:
-  Initial joint angles [0.5235987755982988, 0.5235987755982988, 0.5235987755982988]
+  Initial joint angles [0, 0, 0]
 Result:
-  Reached joint angles:  [  6.01791777e-01  -4.38979900e-16   6.78507613e-09]
+  Reached joint angles:  [ 1.53513654 -1.00181309 -1.25116751]
 Cost:
-  Target endpoint position:  [355, 165]
-  Actual endpoint position:  [247.29677281881749, 169.83611557439184]
+  Target endpoint position:  [165, 85]
+  Predicted endpoint position:  [164.99999999999676, 84.999999999997428]
 Summary:
-  Error:  [ 107.70322718    4.83611557]
-Running time:  427.16312408447266 ms
-------------------------------
+  Error:  [  3.24007488e-12   2.57216470e-12]
+Running time:  302.60705947875977 ms
 ```
 
 #### Visualization
 
-![Alt text](./images/visualization_init.png)
+![Alt text](./images/visualizate_init.png)
 
-![Alt text](./images/visualization_mouse.png)
+![Alt text](./images/visualize_360.png)
 
 ##### References
 
