@@ -115,7 +115,7 @@ Running time:  302.60705947875977 ms
 
 #### Visualization
 
-![Alt text](./images/visualizate_init.png)
+![Alt text](./images/visualize_init.png)
 
 ![Alt text](./images/visualize_360.png)
 
