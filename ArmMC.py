@@ -16,14 +16,13 @@ class LinkedArm3:
         # set default arm lengths: L1, L2, L3
         self.arm_length = np.array([100, 100, 100]) if arm_length is None else arm_length
         # set default joint angles: Theta1-shoulder, Theta2-elbow, Theta3-wrist
-        self.joint_angle_default = np.array([math.pi/6, math.pi/6, math.pi/6]) if joint_angle_default is None else joint_angle_default
+        self.joint_angle_default = np.array([0, 0, 0]) if joint_angle_default is None else joint_angle_default
         # set angles rotation range
-        # self.max_angles = [math.pi*2, math.pi*2, math.pi*2]
-        self.max_angles = [math.pi, math.pi/2, math.pi/2]
-        self.min_angles = [0, 0, 0]
+        self.max_angles = [math.pi*2, math.pi*2, math.pi*2]
+        self.min_angles = [-math.pi*2, -math.pi*2, -math.pi*2]
         
         # initialize joint angles: Theta1, Theta2, Theta3
-        self.joint_angle = [math.pi/6, math.pi/6, math.pi/6] if joint_angle is None else joint_angle
+        self.joint_angle = [0, 0, 0] if joint_angle is None else joint_angle
 
     def get_endpoint(self, joint_angle=None):
         """

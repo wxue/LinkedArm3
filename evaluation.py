@@ -21,9 +21,9 @@ def evaluate(range_of_x, range_of_y, error_threshold):
             # [x,y] -> angle
             angle = arm.inverse_kinematics(xy=x_y)
             # get Predicted endpoint postion
-            actual_xy = arm.get_endpoint(angle)
+            predicted_xy = arm.get_endpoint(angle)
             # calculate root squared error
-            error = np.sqrt((np.array(x_y) - np.array(actual_xy))**2)
+            error = np.sqrt((np.array(x_y) - np.array(predicted_xy))**2)
 
             # print errors that exceed the threshold
             if np.sum(error) > error_threshold:
@@ -34,7 +34,7 @@ def evaluate(range_of_x, range_of_y, error_threshold):
                 print('  Reached joint angles: ', angle)
                 print('Cost: ')
                 print('  Target endpoint position: ', x_y)
-                print('  Actual endpoint position: ', actual_xy)
+                print('  Predicted endpoint position: ', predicted_xy)
                 print('Summary: ')
                 print('  Error: ', error)
                 print('Running time: ', (time.time() - start_time)*1000, "ms")
@@ -44,8 +44,8 @@ def evaluate(range_of_x, range_of_y, error_threshold):
 # 
 # Main: Testing
 # 
-x = np.arange(340, 360, 5)
-y = np.arange(150, 170, 5)
+x = np.arange(150, 170, 5)
+y = np.arange(60, 90, 5)
 threshold = 0.0
 
 evaluate(x, y, threshold)
