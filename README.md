@@ -76,42 +76,6 @@ To evaluate predicted angels, in our situation, our gole would be finding joint 
 
 So our cost function a calculation of the difference/distance between the default joint state and our predicted joint state by using constrained minimization.
 
-#### Analysis
-
-Initially the weight of each joint moving priority is set equally, and the result is:
-
-```
-********* Trail #24 *********
-Task:
-  Initial joint angles [0, 0, 0]
-Result:
-  Reached joint angles:  [ 1.26111729 -0.50670037 -1.66082699]
-Cost:
-  Target endpoint position:  [165, 85]
-  Predicted endpoint position:  [164.99999999770193, 85.000000000189559]
-Summary:
-  Error:  [  2.29806574e-09   1.89558591e-10]
-Running time:  305.3700923919678 ms
-------------------------------
-```
-
-After tried different settings, I found out with a lager weight set on wrist and elbow, better performance will achieve.
-
-Which means a closer angel state the wrist and elbow stay a better result we will get, relatively. A sample evaluation of set weight to [1, 1.5, 2] is shown below:
-
-```
-********* Trail #24 *********
-Task:
-  Initial joint angles [0, 0, 0]
-Result:
-  Reached joint angles:  [ 1.53513654 -1.00181309 -1.25116751]
-Cost:
-  Target endpoint position:  [165, 85]
-  Predicted endpoint position:  [164.99999999999676, 84.999999999997428]
-Summary:
-  Error:  [  3.24007488e-12   2.57216470e-12]
-Running time:  302.60705947875977 ms
-```
 
 #### Visualization
 
@@ -120,6 +84,8 @@ Running time:  302.60705947875977 ms
 ![Alt text](./images/visualize_360.png)
 
 ##### References
+
+https://studywolf.wordpress.com
 
 http://www3.nd.edu/~jstiver/FIN360/Constrained%20Optimization.pdf
 
